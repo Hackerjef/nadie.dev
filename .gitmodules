@@ -1,0 +1,3 @@
+[submodule "src/theme"]
+	path = src/theme
+	url = https://github.com/Tyriar/vscode-snazzy.git
