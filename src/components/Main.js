@@ -8,7 +8,6 @@ import "xterm/css/xterm.css"
 import "../css/terminal.css"
 import V86Terminal from "./V86Terminal";
 import FakeTerminal from "./FakeTerminal";
-import * as assert from "assert";
 
 export default class main extends React.Component {
     constructor() {
