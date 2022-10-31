@@ -1,7 +1,3 @@
-
-// '  Hi! I\'m Nadie, A sysadmin, developer, community admin \x1b[3mprotogen\x1b[0m  ',
-//     '  ↳ for the last 7+ years!',
-
 import { Duration } from "luxon";
 import {v4} from "uuid"
 
@@ -34,7 +30,7 @@ export default class FakeTerminal {
         this.main.terminal.write("\x1b[32m➜\x1b[0m \x1b[36m~\x1b[0m ")
     }
 
-    cmd_process(cmd, args) {
+    cmd_process(cmd, args, handle_return:true) {
         if (cmd)
             switch (cmd) {
                 case "motd": {
@@ -62,16 +58,40 @@ export default class FakeTerminal {
                     break;
                 }
                 case "linux": {
-                    // this.main.terminal.writeln("Starting v86 with buildroot, Please forgive me as this may take a sec~")
-                    // this.main.term_mode = "linux"
-                    // this.main.v86Terminal.ready()
-                    // No return, just break out fully and wait for v86
                     this.main.terminal.writeln("Not ready yet :3")
                     break;
                 }
                 case "whoami": {
                     this.main.terminal.writeln("nobody")
                     this.main.terminal.writeln("↳ I don't know who you are? unless you want me to 👉 👈")
+                    break;
+                }
+                case "cat": {
+                    if (args.length === 0) {
+                        this.main.terminal.writeln("Please enter a file name with command")
+                        break;
+                    }
+                    if (["aboutme", "help", "motd"].includes(args[0])) {
+                        this.cmd_process(args[0], [], false)
+                    } else if (args[0] === "passwords_hidden") {
+                        for( let i=500; i--; )
+                            this.main.terminal.writeln("A")
+                        this.main.terminal.writeln("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                        this.main.terminal.writeln("Access denied")
+                        this.main.terminal.writeln("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                        this.main.terminal.writeln("😳")
+                    } else {
+                        this.main.terminal.writeln("File does not exist")
+                    }
+                    break;
+                }
+                case "ls":
+                case "dir": {
+                    this.main.terminal.writeln("aboutme help motd passwords_hidden")
+                    break;
+                }
+                case "echo": {
+                    this.main.terminal.writeln(args.join(" "))
                     break;
                 }
                 case "help": {
@@ -87,6 +107,10 @@ export default class FakeTerminal {
                         `about | aboutme                my about me~`,
                         `linux                          Fuck around and find out~`,
                         `ifconfig                       Interface info for the website`,
+                        'whoami                         Current user?',
+                        'dir | ls                       List directory',
+                        'echo                           echo echo echo',
+                        'cat                            read out files :)'
                     ].join('\n\r'));
                     break;
                 }
@@ -104,7 +128,7 @@ export default class FakeTerminal {
                         '~ I go by he/him/they/them pronouns',
                         ' \x1b[3m ↳ Though I don\'t fully mind being called any pronouns just keep it respectfull!\x1b[0m',
                         '~ I\'m very shy - most times you see me just in the background watching and looking but please feel free to say hi!',
-                        '~ Born and raised in New york (Yes I have a shitty accent ~_~)',
+                        '~ Born and raised in New York (Yes I have a shitty accent ~_~)',
                         '~ I\'ve been self taught ontop of going to school for linux/windows administration for the last 8+ years',
                         '~ I\'m a protogen, \x1b[3mSorry\x1b[0m',
                     ].join('\n\r'));
@@ -128,7 +152,8 @@ export default class FakeTerminal {
                     break;
                 }
             }
-        this.ready()
+        if (handle_return)
+            this.ready()
     }
 
     onKey(e) {
@@ -136,7 +161,7 @@ export default class FakeTerminal {
             case "Enter":
                 this.main.terminal.write('\r\n');
                 let cmd = this.wline.split(" ");
-                this.cmd_process(cmd[0], cmd.filter(e => e !== cmd[0]));
+                this.cmd_process(cmd[0], cmd.filter(e => e !== cmd[0]), true);
                 this.wline = "";
                 break;
             case "Backspace":
