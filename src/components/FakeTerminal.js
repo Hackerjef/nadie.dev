@@ -119,10 +119,10 @@ export default class FakeTerminal {
                     break;
                 }
                 case "ifconfig": {
-                    await axios.get(`php/api/ip&t=${Date.now()}`)
+                    let ip = await axios.get(`/api/ip?t=${Date.now()}`)
                     this.main.terminal.writeln([
                         'ppp0: Link encap:Point-Point Protocol',
-                        `        inet ${0}  netmask ${0}  broadcast ${0}`,
+                        `        inet ${ip.data['ip']}`,
                         '        RX packets 2742222  bytes 260133075 (260.1 MB)',
                         '        RX errors 0  dropped 0  overruns 0  frame 0',
                         '        TX packets 4076  bytes 305470 (305.4 KB)',

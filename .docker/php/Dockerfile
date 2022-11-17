@@ -6,5 +6,6 @@ RUN apk upgrade --update-cache --available && \
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV PATH /usr/local/bin:$PATH
 WORKDIR /reactapp/public
+ENV dev_enviroment 1
 ENTRYPOINT [ "/reactapp/.docker/php/entry_point.sh" ]
 CMD ["php-fpm"]
