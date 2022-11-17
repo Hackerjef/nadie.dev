@@ -1,0 +1,15 @@
+{
+    "name": "hackerjef/nadie.dev",
+    "description": "personal website",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Nadie",
+            "email": "hackerjef@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "leafs/leaf": "^3.2",
+        "leafs/cookie": "^1.1"
+    }
+}

@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import Main from "./Main"
-import StreamBackground from "./StreamBackground"
+import Main from "./Main";
+import StreamBackground from "./StreamBackground";
 
 
 const App = () => (

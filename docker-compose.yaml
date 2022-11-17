@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  php:
+    build: ./.docker/php
+    restart: unless-stopped
+    ports:
+      - "8071:9000"
+    volumes:
+      - ./:/reactapp
+      - '/reactapp/vendor'
+      - '/version'
+  reactapp:
+    build: ./
+    ports:
+      - "8070:3000"
+    volumes:
+      - './:/reactapp'
+      - '/reactapp/node_modules'
+      - '/version'
+  nginx:
+    build: ./.docker/nginx
+    restart: unless-stopped
+    ports:
+      - "8069:80"
+    volumes:
+      - type: bind
+        source: ./.docker/nginx/nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+    depends_on:
+      - reactapp
+      - php

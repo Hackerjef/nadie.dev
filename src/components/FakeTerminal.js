@@ -1,36 +1,20 @@
+import axios from "axios";
 import { Duration } from "luxon";
-import {v4} from "uuid"
-
-function random_ip(type) {
-    let end;
-    switch (type) {
-        case "netmask":
-            end = 0
-            break
-        case "broadcast":
-            end = 255
-            break
-        default:
-            end = (Math.floor(Math.random() * 255))
-            break
-    }
-
-    return (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+end;
-}
-
+import { v4 } from "uuid"
 
 export default class FakeTerminal {
     constructor(main) {
         this.main = main;
         this.wline = "";
         this.init_date = new Date();
+        this.running_cmd = false
     }
 
     ready() {
         this.main.terminal.write("\x1b[32m➜\x1b[0m \x1b[36m~\x1b[0m ")
     }
 
-    cmd_process(cmd, args, handle_return:true) {
+    async cmd_process(cmd, args, handle_return) {
         if (cmd)
             switch (cmd) {
                 case "motd": {
@@ -74,7 +58,7 @@ export default class FakeTerminal {
                     if (["aboutme", "help", "motd"].includes(args[0])) {
                         this.cmd_process(args[0], [], false)
                     } else if (args[0] === "passwords_hidden") {
-                        for( let i=500; i--; )
+                        for (let i = 500; i--;)
                             this.main.terminal.writeln("A")
                         this.main.terminal.writeln("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                         this.main.terminal.writeln("Access denied")
@@ -135,14 +119,15 @@ export default class FakeTerminal {
                     break;
                 }
                 case "ifconfig": {
+                    await axios.get(`php/api/ip&t=${Date.now()}`)
                     this.main.terminal.writeln([
                         'ppp0: Link encap:Point-Point Protocol',
-                        `        inet ${random_ip()}  netmask ${random_ip("netmask")}  broadcast ${random_ip("broadcast")}`,
+                        `        inet ${0}  netmask ${0}  broadcast ${0}`,
                         '        RX packets 2742222  bytes 260133075 (260.1 MB)',
                         '        RX errors 0  dropped 0  overruns 0  frame 0',
                         '        TX packets 4076  bytes 305470 (305.4 KB)',
                         '        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0',
-                        '        \x1b[3mLike I\'m giving that away, loser >:D\x1b[0m',
+                        '        \x1b[3mLike I\'m giving my info, loser  >:D\x1b[0m',
                         ''
                     ].join('\n\r'));
                     break;
@@ -152,27 +137,32 @@ export default class FakeTerminal {
                     break;
                 }
             }
-        if (handle_return)
+        if (handle_return) {
+            this.running_cmd = false
             this.ready()
+        }
     }
 
     onKey(e) {
+        if (this.running_cmd)
+            return
         switch (e.domEvent.code) {
             case "Enter":
                 this.main.terminal.write('\r\n');
+                this.running_cmd = true
                 let cmd = this.wline.split(" ");
                 this.cmd_process(cmd[0], cmd.filter(e => e !== cmd[0]), true);
                 this.wline = "";
                 break;
             case "Backspace":
                 if (this.wline.length !== 0) {
-                    this.wline = this.wline.slice(0,this.wline.length - 1)
+                    this.wline = this.wline.slice(0, this.wline.length - 1)
                     this.main.terminal.write('\b \b');
                 }
                 break;
             case "KeyC":
                 if (e.domEvent.ctrlKey) {
-                    for( let i=2; i--; )
+                    for (let i = 2; i--;)
                         this.main.terminal.writeln("\n")
                     this.main.terminal.writeln("Ctrl-C hit, reloading page")
                     window.location.reload()
