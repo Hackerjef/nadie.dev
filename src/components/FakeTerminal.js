@@ -120,11 +120,20 @@ export default class FakeTerminal {
                 }
                 case "song": {
                     let song = await axios.get(`/api/song?t=${Date.now()}`)
-                    this.main.terminal.writeln([
-                        'Currently listening to:',
-                        `${song.data['song']}`,
-                        `↳ ${song.data['author']}`
-                    ].join('\n\r'))
+                    if ('message' in song.data) {
+                        if (song.data['message'] === "Nosong") {
+                            this.main.terminal.writeln("Nothings playing")
+                        } else {
+                            console.error(song.data);
+                            this.main.terminal.writeln("❌ Bad Response")
+                        }
+                    } else {
+                        this.main.terminal.writeln([
+                            'Currently listening to:',
+                            `${song.data['song']}`,
+                            `↳ ${song.data['author']}`
+                        ].join('\n\r'))
+                    }
                     break;
                 }
                 case "ifconfig": {
