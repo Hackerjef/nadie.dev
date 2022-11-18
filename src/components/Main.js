@@ -1,8 +1,8 @@
 import React from "react"
-import {Terminal} from "xterm";
-import {FitAddon} from "xterm-addon-fit";
-import {WebLinksAddon} from "xterm-addon-web-links";
-import {WebglAddon} from "xterm-addon-webgl";
+import { Terminal } from "xterm";
+import { FitAddon } from "xterm-addon-fit";
+import { WebLinksAddon } from "xterm-addon-web-links";
+import { WebglAddon } from "xterm-addon-webgl";
 
 import "xterm/css/xterm.css"
 import "../css/terminal.css"
@@ -105,6 +105,8 @@ export default class main extends React.Component {
             '│                                                                            │',
             '│  Twitch: https://twitch.tv/nadie63                                         │',
             '│                                                                            │',
+            '│  Mastodon: https://wuff.space/@Nadie                                       │',
+            '│                                                                            │',
             '│  Discord Server: https://d.nadie.dev/join                                  │',
             '│                                                                            │',
             '│  Discord: Nadie#0063                                                       │',
@@ -119,6 +121,6 @@ export default class main extends React.Component {
 
 
     render() {
-        return (<div ref={(tref) => {this.tref = tref}} id={"terminal"}></div>)
+        return (<div ref={(tref) => { this.tref = tref }} id={"terminal"}></div>)
     }
 }
