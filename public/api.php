@@ -2,6 +2,9 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// Yes this will do more in the future :p its not just going to be for ip
+
+
 app()->config('debug', isset($_SERVER['dev_enviroment']));
 
 app()->setBasePath('/api');
@@ -9,6 +12,7 @@ app()->setBasePath('/api');
 app()->get("/", function () {
   response()->json(["endpt" => "/"]);
 });
+
 
 app()->get("/ip", function () {
     if (isset($_SERVER['HTTP_CLIENT_IP']))

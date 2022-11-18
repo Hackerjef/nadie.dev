@@ -26,9 +26,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "serve": "react-app-rewired build && serve -l 814 -s build",
-    "clean": "rmdir /s build"
+    "build": "react-app-rewired build"
   },
   "eslintConfig": {
     "extends": [

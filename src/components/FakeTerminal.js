@@ -118,6 +118,15 @@ export default class FakeTerminal {
                     ].join('\n\r'));
                     break;
                 }
+                case "song": {
+                    let song = await axios.get(`/api/song?t=${Date.now()}`)
+                    this.main.terminal.writeln([
+                        'Currently listening to:',
+                        `${song.data['song']}`,
+                        `↳ ${song.data['author']}`
+                    ].join('\n\r'))
+                    break;
+                }
                 case "ifconfig": {
                     let ip = await axios.get(`/api/ip?t=${Date.now()}`)
                     this.main.terminal.writeln([
