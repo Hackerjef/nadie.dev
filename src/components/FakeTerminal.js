@@ -94,7 +94,9 @@ export default class FakeTerminal {
                         'whoami                         Current user?',
                         'dir | ls                       List directory',
                         'echo                           echo echo echo',
-                        'cat                            read out files :)'
+                        'cat                            read out files :)',
+                        'song                           The song i\'m currently listening too',
+                        'status                         What my current status is on discord'
                     ].join('\n\r'));
                     break;
                 }
@@ -118,8 +120,22 @@ export default class FakeTerminal {
                     ].join('\n\r'));
                     break;
                 }
+                case "status": {
+                    let status = await axios.get(`/api/webapi/status?t=${Date.now()}`)
+                    if ('message' in status.data) {
+                        if (status.data['message'] !== "Nostatus") {
+                            console.error(status.data);
+                            this.main.terminal.writeln("❌ Bad Response")
+                        }
+                    } else {
+                        this.main.terminal.writeln([
+                            `↳ ${status.data['status']}`
+                        ].join('\n\r'))
+                    }
+                    break;
+                }
                 case "song": {
-                    let song = await axios.get(`/api/song?t=${Date.now()}`)
+                    let song = await axios.get(`/api/webapi/song?t=${Date.now()}`)
                     if ('message' in song.data) {
                         if (song.data['message'] === "Nosong") {
                             this.main.terminal.writeln("Nothings playing")
@@ -138,9 +154,11 @@ export default class FakeTerminal {
                 }
                 case "ifconfig": {
                     let ip = await axios.get(`/api/ip?t=${Date.now()}`)
+                    let type = (ip.data['ip'].contains(":")) ? "inet6" : "inet";
+
                     this.main.terminal.writeln([
                         'ppp0: Link encap:Point-Point Protocol',
-                        `        inet ${ip.data['ip']}`,
+                        `        ${type} ${ip.data['ip']}`,
                         '        RX packets 2742222  bytes 260133075 (260.1 MB)',
                         '        RX errors 0  dropped 0  overruns 0  frame 0',
                         '        TX packets 4076  bytes 305470 (305.4 KB)',
