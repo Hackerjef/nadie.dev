@@ -154,7 +154,7 @@ export default class FakeTerminal {
                 }
                 case "ifconfig": {
                     let ip = await axios.get(`/api/ip?t=${Date.now()}`)
-                    let type = (ip.data['ip'].contains(":")) ? "inet6" : "inet";
+                    let type = (ip.data['ip'].includes(":")) ? "inet6" : "inet";
 
                     this.main.terminal.writeln([
                         'ppp0: Link encap:Point-Point Protocol',
