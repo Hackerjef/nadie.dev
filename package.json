@@ -19,6 +19,7 @@
     "react-resize-observer": "^1.1.1",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "v86": "file:./v86_repo/v86.tgz",
     "xterm": "^5.0.0",
     "xterm-addon-fit": "^0.6.0",
     "xterm-addon-web-links": "^0.7.0",

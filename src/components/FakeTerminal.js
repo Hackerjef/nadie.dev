@@ -42,7 +42,11 @@ export default class FakeTerminal {
                     break;
                 }
                 case "linux": {
-                    this.main.terminal.writeln("Not ready yet :3")
+                    this.main.terminal.clear()
+                    this.main.term_mode = "v86"
+                    handle_return = false
+                    this.running_cmd = false
+                    this.main.v86Terminal.ready()
                     break;
                 }
                 case "whoami": {

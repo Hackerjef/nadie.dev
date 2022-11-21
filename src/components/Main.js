@@ -64,23 +64,24 @@ export default class main extends React.Component {
         this.webglAddon.activate(this.terminal)
         this.fitAddon.fit();
 
+        this.terminal.onData((data) => {
+            if (this.term_mode === "v86") {
+                return this.v86Terminal.ondata(data)
+            }
+        })
+
+
         this.terminal.onKey((e) => {
-            switch (e.domEvent.key) {
-                case "F5":
-                    return window.location.reload()
-                default: {
-                    switch (this.term_mode) {
-                        case "fake":
-                            return this.fakeTerminal.onKey(e)
-                        case "v86":
-                            return this.v86Terminal.onKey(e)
-                        default:
-                            break;
+            if (this.term_mode === "fake") {
+                switch (e.domEvent.key) {
+                    case "F5":
+                        return window.location.reload()
+                    default: {
+                        return this.fakeTerminal.onKey(e)
                     }
                 }
             }
         })
-
         this.IntroMsg()
         if (this.term_mode === "fake")
             this.fakeTerminal.ready()
