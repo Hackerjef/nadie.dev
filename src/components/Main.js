@@ -82,6 +82,7 @@ export default class main extends React.Component {
                 }
             }
         })
+
         this.IntroMsg()
         if (this.term_mode === "fake")
             this.fakeTerminal.ready()
@@ -115,7 +116,7 @@ export default class main extends React.Component {
             '└────────────────────────────────────────────────────────────────────────────┘',
             '',
             'To find out about me please type aboutme or type help for more commands!',
-            // '\x1b[3m ↳ If you want something special type linux ;)\x1b[0m',
+            '\x1b[3m ↳ If you want something special type linux ;)\x1b[0m',
             '',
         ].join('\n\r'));
     }

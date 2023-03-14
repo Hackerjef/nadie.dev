@@ -3,8 +3,6 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 // Yes this will do more in the future :p its not just going to be for ip
-
-
 app()->config('debug', isset($_SERVER['dev_enviroment']));
 
 app()->setBasePath('/api');
