@@ -7,8 +7,8 @@ import Merp from "./Merp";
 const App = () => (
     <Routes>
         <Route exact path="/streambackground" element={<StreamBackground />} />
-        <Route exact path="/merp" element={<Merp />} />
-        <Route exact path="/" element={<Main />} />
+        <Route exact path="/" element={<Merp />} />
+        <Route exact path="/merp" element={<Main />} />
     </Routes >
 )
 
