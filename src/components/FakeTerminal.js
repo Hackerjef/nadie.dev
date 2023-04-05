@@ -54,6 +54,11 @@ export default class FakeTerminal {
                     this.main.terminal.writeln("↳ I don't know who you are? unless you want me to 👉 👈")
                     break;
                 }
+                case "merp": {
+                    this.main.terminal.writeln("merp");
+                    this.main.terminal.writeln("https://nadie.dev/merp");
+                    break;
+                }
                 case "cat": {
                     if (args.length === 0) {
                         this.main.terminal.writeln("Please enter a file name with command")
