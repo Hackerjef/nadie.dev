@@ -129,6 +129,14 @@ export default class FakeTerminal {
                     ].join('\n\r'));
                     break;
                 }
+                case "valcrye": {
+                    this.main.terminal.writeln([
+                        '',
+                        'Hey - you\'re great c:',
+                        'uwu'
+                    ])
+                    break;
+                }
                 case "status": {
                     let status = await axios.get(`/api/webapi/status?t=${Date.now()}`)
                     if ('message' in status.data) {
