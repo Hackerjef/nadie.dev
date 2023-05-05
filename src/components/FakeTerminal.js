@@ -134,7 +134,7 @@ export default class FakeTerminal {
                         '',
                         'Hey - you\'re great c:',
                         'uwu'
-                    ])
+                    ].join('\n\r'))
                     break;
                 }
                 case "status": {
