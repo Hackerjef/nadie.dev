@@ -111,7 +111,7 @@ export default class main extends React.Component {
             '│                                                                            │',
             '│  Discord Server: https://d.nadie.dev/join                                  │',
             '│                                                                            │',
-            '│  Discord: Nadie#0063                                                       │',
+            '│  Discord: nadie  (Used to be Nadie#0063)                                   │',
             '│                                                                            │',
             '└────────────────────────────────────────────────────────────────────────────┘',
             '',
