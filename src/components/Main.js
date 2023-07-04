@@ -2,10 +2,12 @@ import React from "react"
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 import { WebLinksAddon } from "xterm-addon-web-links";
-import { WebglAddon } from "xterm-addon-webgl";
+import { CanvasAddon } from 'xterm-addon-canvas';
+import { Unicode11Addon } from 'xterm-addon-unicode11';
 
 import "xterm/css/xterm.css"
 import "../css/terminal.css"
+
 import V86Terminal from "./V86Terminal";
 import FakeTerminal from "./FakeTerminal";
 
@@ -45,8 +47,9 @@ export default class main extends React.Component {
         this.v86Terminal = new V86Terminal(this)
         this.fakeTerminal = new FakeTerminal(this)
         this.fitAddon = new FitAddon();
-        this.weblinkAddon = new WebLinksAddon()
-        this.webglAddon = new WebglAddon()
+        this.CanvasAddon = new CanvasAddon();
+        this.weblinkAddon = new WebLinksAddon();
+        this.unicode11Addon = new Unicode11Addon();
         this.resizeObserver = new ResizeObserver(this.DidResize);
     }
 
@@ -58,11 +61,14 @@ export default class main extends React.Component {
 
         this.terminal.loadAddon(this.fitAddon);
         this.terminal.loadAddon(this.weblinkAddon);
-        this.terminal.loadAddon(this.webglAddon)
+        this.terminal.loadAddon(this.CanvasAddon);
+        this.terminal.loadAddon(this.unicode11Addon);
 
         this.weblinkAddon.activate(this.terminal)
-        this.webglAddon.activate(this.terminal)
+        this.CanvasAddon.activate(this.terminal)
         this.fitAddon.fit();
+
+        this.terminal.unicode.activeVersion = '11';
 
         this.terminal.onData((data) => {
             if (this.term_mode === "v86") {
@@ -105,7 +111,7 @@ export default class main extends React.Component {
             '│                                                                            │',
             '│  Twitter: https://twitter.com/hackerjef                                    │',
             '│                                                                            │',
-            '│  Twitch: https://twitch.tv/nadie63                                         │',
+            '│  Bsky: https://bsky.app/profile/nadie.bsky.social                          │',
             '│                                                                            │',
             '│  Mastodon: https://wuff.space/@Nadie                                       │',
             '│                                                                            │',

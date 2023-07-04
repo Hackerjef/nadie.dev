@@ -21,9 +21,10 @@
     "react-scripts": "5.0.1",
     "v86": "file:./v86_repo/v86.tgz",
     "xterm": "^5.0.0",
+    "xterm-addon-canvas": "^0.4.0",
     "xterm-addon-fit": "^0.6.0",
-    "xterm-addon-web-links": "^0.7.0",
-    "xterm-addon-webgl": "^0.13.0"
+    "xterm-addon-unicode11": "^0.5.0",
+    "xterm-addon-web-links": "^0.7.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -48,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "eslint-config-react": "^1.1.7",
     "eslint-config-react-app": "^7.0.1"
   }
