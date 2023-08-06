@@ -109,7 +109,7 @@ export default class main extends React.Component {
             '│                                                                            │',
             '│  Github:  https://github.com/Hackerjef                                     │',
             '│                                                                            │',
-            '│  Twitter: https://twitter.com/hackerjef                                    │',
+            '│  Twitter: https://twitter.com/nadie63_                                     │',
             '│                                                                            │',
             '│  Bsky: https://bsky.app/profile/nadie.bsky.social                          │',
             '│                                                                            │',
