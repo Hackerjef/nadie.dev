@@ -116,16 +116,15 @@ export default class FakeTerminal {
                         'Hello!!',
                         '',
                         'I\'m Nadie, I\'m a sysadmin with a passion for computing and making things!',
-                        'I\'m a student, bot dev, administrator, moderator in different communities on discord, steam and Minecraft for the last 7+ years',
+                        'I\'ve been working in many communities over the years when it comes to development, administration and Moderation.',
                         '',
                         'Little tidbits about me~',
                         '',
                         '~ I go by he/him/they/them pronouns',
                         ' \x1b[3m ↳ Though I don\'t fully mind being called any pronouns just keep it respectfull!\x1b[0m',
-                        '~ I\'m very shy - most times you see me just in the background watching and looking but please feel free to say hi!',
-                        '~ Born and raised in New York (Yes I have a shitty accent ~_~)',
-                        '~ I\'ve been self taught ontop of going to school for linux/windows administration for the last 8+ years',
-                        '~ I\'m a protogen, \x1b[3mSorry\x1b[0m',
+                        '~ I\'m very quiet - most times you see me just in the background watching and looking but please feel free to say hi!',
+                        '~ Born and raised in New York',
+                        '~ self taught! As ive said above I have a passion for computers and technology as a whole',
                     ].join('\n\r'));
                     break;
                 }
